@@ -1,0 +1,94 @@
+﻿@using Syncfusion.EJ2
+@model NavesPortalforWebWithCoreMvc.ViewModels.NsnSearchViewModel
+
+@{
+    ViewBag.PageTitle = "PMS > Ship Life Cycle Stauts";
+    ViewBag.PlatformName = "PMS";
+    ViewBag.MenuName = "Ship Life Cycle Status";
+    ViewBag.FunctionName = "List";
+}
+
+@section SearchSection{
+    <form asp-action="Index" asp-controller="PmsShipLIfeCycleStatus" method="post">
+        <div class="row align-items-center m-0">
+            <div class="col">
+                <ejs-textbox id="txtSearchBox" ejs-for="SEARCH_STRING" cssClass="e-outline inputable" placeholder="Search Keyword..."></ejs-textbox>
+            </div>
+            <div class="col-auto">
+                Period
+            </div>
+            <div class="col-2">
+                <ejs-datepicker id="dpStartDate" value="@ViewBag.StartDate" ejs-for="START_DATE" value="@DateTime.Now.AddYears(-3).ToShortDateString()" format="yyyy-MM-dd" placeholder="Start Date..." cssClass="inputable"></ejs-datepicker>
+            </div>
+            <div class="col-2">
+                <ejs-datepicker id="dpEndDate" value="@ViewBag.EndDate" ejs-for="END_DATE" value="@DateTime.Now.ToShortDateString()" format="yyyy-MM-dd" placeholder="End Date..." cssClass="inputable"></ejs-datepicker>
+            </div>
+            <div class="col">
+                <button asp-controller="PmsProjectIdManagement" asp-action="Index" id="Search" type="submit" class="btn btn-purple btn-medium rounded-pill waves-effect waves-light">Search</button>
+            </div>
+        </div>
+    </form>
+}
+
+@section ContentsSection{
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="ps-2 pageContentTitle">
+            <h3>@ViewBag.MenuName</h3>
+        </div>
+        <div class="ps-1">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ejs-grid id="Grid" dataSource="@ViewBag.dataSource" recordClick="recordClick" dataBound="dataBound"
+                  height="510"
+                  allowMultiSorting="true"
+                  allowTextWrap="true"
+                  allowResizing="true"
+                  allowReordering="true"
+                  allowSorting="true"
+                  allowFiltering="true"
+                  allowExcelExport="true"
+                  allowPdfExport="true"
+                  allowGrouping="true"
+                  allowPaging="true"
+                  showColumnChooser="true"
+                  toolbar="@( new List<string>() { "ColumnChooser", "ExcelExport", "PdfExport", "CsvExport", "Print"})">
+                <e-grid-loadingIndicator indicatorType="Shimmer"></e-grid-loadingIndicator>
+                <e-grid-filterSettings type="CheckBox"></e-grid-filterSettings>
+                <e-grid-pagesettings pageCount="10" pageSize="15" pageSizes="@(new string[] {"10", "15", "20" , "50", "All" })"></e-grid-pagesettings>
+                <e-grid-groupSettings enableLazyLoading="true" allowReordering="true" showDropArea="true"></e-grid-groupSettings>
+                <e-grid-columns>
+                    <e-grid-column field="NO" headerText="No" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="80"></e-grid-column>
+                    <e-grid-column field="NSN_ID" headerText="NSN ID" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="JOB_ID" headerText="Job ID" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="VESSEL_CATEGORY_CODE" headerText="Vessel Category" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="VESSEL_NAME_KR" headerText="Vessel Name" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="SHIP_NO" headerText="Hull No." customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="YARD_MAKER_NAME" headerText="Yard/Maker" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="CLIENT_NAME" headerText="Client" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="DELIVERY_DATE" headerText="Delivery Date" format="yyyy-MM-dd" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                    <e-grid-column field="REG_DATE" headerText="Reg. Date" format="yyyy-MM-dd" customAttributes=@(new{@class="customCss"}) textAlign="Center" width="150"></e-grid-column>
+                </e-grid-columns>
+            </ejs-grid>
+        </div>
+    </div>
+    <script>
+        function recordClick(args) {
+            window.location.href = "/PmsShipLIfeCycleStatus/Detail/" + args.rowData.NSN_IDX;
+        }
+
+        function dataBound() {
+            var grid = document.getElementById('Grid').ej2_instances[0];
+            grid.hideScroll();
+        }
+    </script>
+}
+
+@section Scripts{
+    <script>
+        
+    </script>
+
+}

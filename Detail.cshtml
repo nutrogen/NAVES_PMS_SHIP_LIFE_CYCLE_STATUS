@@ -1,0 +1,40 @@
+﻿@using Syncfusion.EJ2
+@using Syncfusion.EJ2.Notifications;
+@model NavesPortalforWebWithCoreMvc.Models.VNAV_SELECT_PMS_SHIPLIFECYCLE_LIST
+
+@{
+    ViewBag.PageTitle = "PMS > Ship Life Cycle Status";
+    ViewBag.PlatformName = "PMS";
+    ViewBag.MenuName = "Ship Life Cycle Status";
+    ViewBag.FunctionName = "Detail";
+}
+
+@section ContentsSection{
+    <div class="row">
+        <div class="col-md-12">
+            <ejs-grid id="Grid" dataSource="ViewBag.dataSource"
+                  enableInfiniteScrolling="true"
+                  allowSorting="true"
+                  allowResizing="true"
+                  showColumnChooser="true"
+                  toolbar="@( new List<string>() {"Print","ExcelExport","PdfExport","Add", "ColumnChooser"})">
+                <e-grid-columns>
+                    <e-grid-column field="NO" headerText="No" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="NSN_ID" headerText="NSN ID" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="JOB_ID" headerText="Job ID" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="VESSEL_CATEGORY_CODE" headerText="Vessel Category" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="VESSEL_NAME" headerText="Vessel Name" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="HULL_NO" headerText="Hull No." customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="YARD_MAKER_NAME" headerText="Yard/Maker" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                    <e-grid-column field="CLIENT_NAME" headerText="Client" customAttributes=@(new{@class="customCss"})></e-grid-column>
+                </e-grid-columns>
+            </ejs-grid>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            Work History
+        </div>
+    </div>
+}
